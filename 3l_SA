@@ -1,0 +1,84 @@
+import UIKit
+
+enum parametersEngine: String {
+       case on = "Включен"
+       case off = "Выключен"
+}
+
+//switch parametersTrunk {
+//    case .full(let mass) where mass > 150:
+//        print("Багажное отделение переполнено")
+//    case .empty(let mass) where mass < 50:
+//        print("Багажное отделение пустое")
+//default:
+  //      print("Багажное отеделение заполнено, но не полностью")
+//}
+enum parametersWindow: String {
+      case open = "Открыты"
+      case close = "Закрыты"
+}
+
+enum parametersTrunk: String {
+       case full = "Полное"
+       case empty = "Пустое"
+}
+
+struct Vehicle {
+    var brand: String
+    var year: Int
+    var Trunk: parametersTrunk
+    var window: parametersWindow
+    var engine: parametersEngine
+    var fullTrunk: Int
+    
+    
+    func statusEngine(status: parametersEngine ){
+           print(engine.rawValue)
+    }
+    
+    mutating func actionWindow (action: parametersWindow) {
+        switch action{
+        case .open:
+            print(action.rawValue)
+           self.window = parametersWindow.open
+        case .close:
+            print(action.rawValue)
+            self.window = .close
+        }
+    }
+     func description(){
+    print("Автомобиль марки \(brand), \(year) года выпуска, сейчас двигатель \(engine.rawValue), окна \(window.rawValue), багажное отделение \(Trunk.rawValue), при максимально допустимом обьеме загрузки: \(fullTrunk)")
+    }
+}
+
+struct commercialVehicle {
+    var brand: String
+    var year: Int
+    var Trunk: parametersTrunk
+    var window: parametersWindow
+    var engine: parametersEngine
+    var fullTrunk: Int
+
+    func statusEngine(status: parametersEngine ){
+        print(engine.rawValue)
+    }
+    func commercialDescription(){
+        print("Грузовик марки \(brand), \(year) года выпуска, сейчас двигатель \(engine.rawValue), окна \(window.rawValue), багажное отделение\(Trunk.rawValue), при максимально допустимом обьеме загрузки: \(fullTrunk)")
+    }
+}
+
+
+
+var vehicle1 = Vehicle(brand:"BMW" , year: 2014, Trunk: .empty, window: .open, engine: .on, fullTrunk: 420 )
+var vehicle2 = Vehicle(brand:"ВАЗ" , year: 2001, Trunk: .full, window: .close, engine: .off, fullTrunk: 350 )
+var commercialVehicle1 = commercialVehicle(brand:"VOLVO" , year: 2011, Trunk: .full, window: .close, engine: .off, fullTrunk: 1500)
+var commercialVehicle2 = commercialVehicle(brand:"КАМАЗ" , year: 1999, Trunk: .empty, window: .close, engine: .on, fullTrunk: 1250)
+
+
+vehicle1.description()
+vehicle2.description()
+commercialVehicle1.commercialDescription()
+commercialVehicle2.commercialDescription()
+vehicle1.actionWindow(action: .close)
+vehicle1.actionWindow(action: .open)
+vehicle1.actionWindow(action: .close)
